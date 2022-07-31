@@ -10,7 +10,7 @@ export const useStaticText = () => {
 
   useEffect(() => {
     setText(navigator.language.includes('ru') ? textRu : textEN);
-  }, [navigator.language]);
+  }, []);
 
   return text;
 };

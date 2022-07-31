@@ -28,7 +28,7 @@ const Button = (props: IProps) => {
     <button
       onClick={() => props.onClick()}
       disabled={props.disabled}
-      className={classNames(getClassName())}
+      className={classNames(getClassName())} //button blue
     >
       {props.children}
     </button>

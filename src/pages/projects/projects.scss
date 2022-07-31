@@ -36,7 +36,67 @@
   justify-content: center;
   align-items: center;
   font-weight: bolder;
-  & > button {
-    margin-top: 40px;
+  //& > button {
+  //  margin-top: 40px;
+  //}
+}
+
+.createProjectWrapper {
+  width: 100%;
+  padding: 12px 0;
+}
+
+.createProjectForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.createProjectFormItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 12px;
+  //&:last-child {
+  //  margin-bottom: 0;
+  //}
+}
+
+// перенести в отдельный компонент Input
+.input {
+  padding: 0 8px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid #cacaca;
+  border-radius: 4px;
+  background-color: #fefefe;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 28px;
+  &:focus {
+    outline: none;
   }
+}
+
+.textarea {
+  box-sizing: border-box;
+  padding: 0 8px;
+  height: 120px;
+  border: 1px solid #cacaca;
+  border-radius: 4px;
+  background-color: #fefefe;
+  resize: none;
+  font-size: 16px;
+  font-family: inherit;
+
+  line-height: 28px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.formLabel {
+  font-weight: bolder;
+  color: #aaaaaa;
+  font-size: 12px;
+  line-height: 24px;
 }

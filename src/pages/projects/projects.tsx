@@ -2,22 +2,28 @@ import Layout from '../../components/layout/layout';
 import { useStaticText } from '../../hooks/useStaticText';
 import './projects.scss';
 import Grid from '../../components/grid/grid';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { ProjectGridItem } from '../../types';
 import Button from '../../components/button/button';
 import _ from 'lodash';
 import { ReactComponent as SortAscIcon } from '../../assets/icons/sort-asc.svg';
 import { ReactComponent as SortDesIcon } from '../../assets/icons/sort-des.svg';
+import Modal from '../../components/modal/modal';
+import { CreateProject } from './createProject';
+import { useNavigate } from 'react-router-dom';
 
-type ProjectGridItemKeys = keyof ProjectGridItem;
+type ProjectGridItemKeys = keyof Omit<ProjectGridItem, 'id'>;
 
 const Projects = () => {
   const [sortTargetIndex, setSortTargetIndex] = useState<number | null>(null);
   const [sortModeIsAsc, setSortModeIsAsc] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const staticTextProjects = useStaticText().pages.projects;
+  const navigate = useNavigate();
   const styleWidthList = [4, 1, 2, 3];
   const [mockList, setMockList] = useState(() => {
-    const itemLIst: ProjectGridItem[] = [
+    const itemLIst: Omit<ProjectGridItem, 'id'>[] = [
       {
         title: 'petLove',
         code: 'PET',
@@ -55,6 +61,13 @@ const Projects = () => {
     setMockList(result);
   };
 
+  // const onSelectProject = useCallback((id: number) => {
+  //   const code = mockList.find((item) => item.id === id);
+  //   if (code) {
+  //     navigate(`/${code}/`);
+  //   }
+  // }, []);
+
   return (
     <Layout>
       <div className="projectsWrapper">
@@ -64,7 +77,11 @@ const Projects = () => {
               {staticTextProjects.title}
             </div>
             <div className="projectsHeaderButton">
-              <Button onClick={() => console.log('button')} color={'blue'}>
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                color="blue"
+                outlined
+              >
                 Создать проект
               </Button>
             </div>
@@ -112,6 +129,13 @@ const Projects = () => {
           </div>
         </div>
       </div>
+      <Modal
+        open={isModalOpen}
+        title="Создать проект"
+        onClose={() => setIsModalOpen(false)}
+      >
+        <CreateProject />
+      </Modal>
     </Layout>
   );
 };
