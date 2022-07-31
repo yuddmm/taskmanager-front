@@ -1,10 +1,15 @@
-.projectWrapper {
-  padding-top: 10px;
+.projectsWrapper {
 }
 
 .projectContainer {
   display: flex;
   flex-direction: column;
+}
+
+.projectsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .projectTitle {

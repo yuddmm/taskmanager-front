@@ -25,11 +25,20 @@
   }
 }
 
+.gridHeaderItemText {
+  flex-grow: 1;
+}
+
 .gridItem {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding-left: 8px;
+  padding: 0 8px;
+}
+
+.gridHeaderSortIcon {
+  width: 28px;
+  height: 28px;
 }
 
 .grid-1 {
