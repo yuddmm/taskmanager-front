@@ -1,0 +1,53 @@
+.gridWrapper {
+  width: 100%;
+  flex-grow: 1;
+}
+
+.gridHeader {
+  border-bottom: 2px solid #cfcfcf;
+  font-weight: bolder;
+}
+
+.gridListRow {
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.gridRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 36px;
+}
+
+.gridHeaderItem {
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+.gridItem {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 8px;
+}
+
+.grid-1 {
+  width: 10%;
+}
+
+.grid-2 {
+  width: 20%;
+}
+
+.grid-3 {
+  width: 30%;
+}
+
+.grid-4 {
+  width: 40%;
+}
+
+.grid-5 {
+  width: 50%;
+}
