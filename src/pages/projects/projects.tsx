@@ -5,16 +5,21 @@ import Grid from '../../components/grid/grid';
 import React, { useMemo, useState } from 'react';
 import { ProjectGridItem } from '../../types';
 import Button from '../../components/button/button';
+import _ from 'lodash';
+import { ReactComponent as SortAscIcon } from '../../assets/icons/sort-asc.svg';
+import { ReactComponent as SortDesIcon } from '../../assets/icons/sort-des.svg';
 
 type ProjectGridItemKeys = keyof ProjectGridItem;
 
 const Projects = () => {
+  const [sortTargetIndex, setSortTargetIndex] = useState<number | null>(null);
+  const [sortModeIsAsc, setSortModeIsAsc] = useState<boolean>(true);
   const staticTextProjects = useStaticText().pages.projects;
   const styleWidthList = [4, 1, 2, 3];
   const [mockList, setMockList] = useState(() => {
     const itemLIst: ProjectGridItem[] = [
       {
-        title: 'PetLove',
+        title: 'petLove',
         code: 'PET',
         manager: 'Юсупов Дмитрий Эдуардович',
         url: 'Отсутствует',
@@ -35,24 +40,37 @@ const Projects = () => {
     return itemLIst;
   });
 
-  // const onSortHandler = (index: number) => {
-  //   const key = Object.keys(mockList)[index] as ProjectGridItemKeys;
-  //
-  //   setMockList((prevState) => {
-  //     const newState = prevState.sort((a, b) => a[key].localeCompare(b[key]));
-  //
-  //     return newState;
-  //   });
-  // };
+  const onSortHandler = (index: number) => {
+    // Потом сделать сортировку на бэке и получение данных
+    const key = Object.keys(mockList[0])[index] as ProjectGridItemKeys;
+    const result = _.orderBy(mockList, (obj) => obj[key]);
+
+    if (sortTargetIndex === index) {
+      setSortModeIsAsc((prevState) => !prevState);
+    } else {
+      setSortTargetIndex(index);
+      setSortModeIsAsc(true);
+    }
+
+    setMockList(result);
+  };
 
   return (
     <Layout>
       <div className="projectsWrapper">
         <div className="projectsContainer container">
-          <div className="projectsTitle title">{staticTextProjects.title}</div>
+          <div className="projectsHeader pageHeader">
+            <div className="projectsTitle title">
+              {staticTextProjects.title}
+            </div>
+            <div className="projectsHeaderButton">
+              <Button onClick={() => console.log('button')} color={'blue'}>
+                Создать проект
+              </Button>
+            </div>
+          </div>
           <div className="projectGrid">
             <Grid
-              headerTitleList={staticTextProjects.gridHeaderList}
               itemList={mockList}
               styleWidthList={styleWidthList}
               renderHeaderList={() => {
@@ -62,9 +80,19 @@ const Projects = () => {
                       return (
                         <div
                           className={`gridHeaderItem gridItem grid-${styleWidthList[index]}`}
+                          onClick={() => onSortHandler(index)}
                           key={index}
                         >
-                          {item}
+                          <div className="gridHeaderItemText">{item}</div>
+                          {sortTargetIndex === index ? (
+                            <div className="gridHeaderSortIcon">
+                              {sortModeIsAsc ? (
+                                <SortAscIcon />
+                              ) : (
+                                <SortDesIcon />
+                              )}
+                            </div>
+                          ) : null}
                         </div>
                       );
                     })}
@@ -76,12 +104,6 @@ const Projects = () => {
                   <div className="projectsGridErrorWrapper">
                     <div className="projectsGridErrorMessage">
                       {staticTextProjects.gridErrorText}
-                      <Button
-                        onClick={() => console.log('open modal')}
-                        color={'blue'}
-                      >
-                        Создать проект
-                      </Button>
                     </div>
                   </div>
                 );

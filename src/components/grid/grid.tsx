@@ -1,7 +1,6 @@
 import './grid.scss';
 
 interface IProps {
-  headerTitleList: string[];
   renderHeaderList(): JSX.Element;
   styleWidthList: number[];
   itemList?: object[];
