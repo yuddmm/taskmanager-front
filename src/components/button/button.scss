@@ -12,15 +12,19 @@
 
 .blue {
   background-color: #2d5ae2;
-  border: 0px solid #2d5ae2;
+  border: 0 solid #2d5ae2;
   color: #fff;
+  padding: 2px 4px;
   &:hover {
     background-color: #4872f3;
-    border: 0px solid #4872f3;
   }
 }
 
 .outlined {
   border-width: 1px;
   background-color: transparent;
+  color: #4872f3;
+  &:hover {
+    color: #fff;
+  }
 }
