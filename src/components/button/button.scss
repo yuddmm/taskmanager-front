@@ -1,5 +1,6 @@
 .button {
   height: 36px;
+  box-sizing: border-box;
   padding: 0 16px;
   outline: none;
   border: none;
@@ -11,8 +12,15 @@
 
 .blue {
   background-color: #2d5ae2;
+  border: 0px solid #2d5ae2;
   color: #fff;
   &:hover {
     background-color: #4872f3;
+    border: 0px solid #4872f3;
   }
+}
+
+.outlined {
+  border-width: 1px;
+  background-color: transparent;
 }
