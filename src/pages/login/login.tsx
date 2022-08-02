@@ -1,5 +1,12 @@
+import Layout from '../../components/layout/layout';
+
 const Login = () => {
-  return <h1>Name</h1>;
+  return (
+    <div>
+      <Layout />
+      <h1>Name</h1>
+    </div>
+  );
 };
 
 export default Login;
