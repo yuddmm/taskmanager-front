@@ -11,6 +11,7 @@ import { ReactComponent as SortDesIcon } from '../../assets/icons/sort-des.svg';
 import Modal from '../../components/modal/modal';
 import { CreateProject } from './createProject';
 import { useNavigate } from 'react-router-dom';
+import PageHeader from '../../components/pageHeader/pageHeader';
 
 type ProjectGridItemKeys = keyof Omit<ProjectGridItem, 'id'>;
 
@@ -72,11 +73,9 @@ const Projects = () => {
     <Layout>
       <div className="projectsWrapper">
         <div className="projectsContainer container">
-          <div className="projectsHeader pageHeader">
-            <div className="projectsTitle title">
-              {staticTextProjects.title}
-            </div>
-            <div className="projectsHeaderButton">
+          <PageHeader
+            title={staticTextProjects.title}
+            renderButton={() => (
               <Button
                 onClick={() => setIsModalOpen(true)}
                 color="blue"
@@ -84,8 +83,8 @@ const Projects = () => {
               >
                 Создать проект
               </Button>
-            </div>
-          </div>
+            )}
+          />
           <div className="projectGrid">
             <Grid
               itemList={mockList}
